@@ -1,11 +1,20 @@
 pipeline {
-  agent { docker { image 'maven:3.3.3' } }
+  agent any
+  tools {
+  maven "maven"
+  }
   stages {
-    stage('Static Code Analysis') { // Get code
+    stage('Build') { // Get code
       steps {
         // get code from our Git repository
         git 'https://github.com/rahmanca/DevOps-Demo-WebApp.git'
+        sh "mvn clean compile"
         }
+        post{
+        success {
+          echo "Success"
+          }
+       }
       } 
     }
   }
