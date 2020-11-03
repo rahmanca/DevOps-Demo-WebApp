@@ -92,7 +92,7 @@ stages {
 
     stage ('DeployProd') {
         steps {
-            sh 'mvn clean install'
+            sh 'mvn clean install -f pom.xml'
             deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://35.224.237.85:8080')], contextPath: 'ProdWebapp', war: '**/*.war'
         }
     }
