@@ -80,13 +80,20 @@ stages {
         }
       }
       
-      stage('Performance Test') { // Get code
-      steps {
+      //stage('Performance Test') { // Get code
+      //steps {
         // get code from our Git repository
-        echo 'Running BalzeMeterTest'
-        blazeMeterTest credentialsId: 'Blazemeter', testId: '8499632.taurus', workspaceId: '650666'
+        //echo 'Running BalzeMeterTest'
+        //blazeMeterTest credentialsId: 'Blazemeter', testId: '8499632.taurus', workspaceId: '650666'
+        
+        //}
+      //}
+      
+      stage('performance-test'){
+        steps{
+            blazeMeterTest credentialsId: 'blazemeter', testId: '8656444.taurus', workspaceId: '683047'
+             }
         }
-      }
       
 
 
