@@ -99,7 +99,7 @@ stages {
     
     stage('Sanity Test') { // Get code
       steps {
-      sh 'mvn clean install -f Aceptancetest/pom.xml'
+      sh 'mvn clean install -f Acceptancetest/pom.xml'
         // get code from our Git repository
         publishHTML([
             allowMissing: false,
