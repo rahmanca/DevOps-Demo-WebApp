@@ -1,7 +1,7 @@
 pipeline {
 agent any
 tools {
-maven 'Maven3'
+maven 'maven'
 }
 
 stages {
@@ -61,7 +61,19 @@ buildNumber: '50'
 )
 }
 }
-
+stage('UI Test') { // Get code
+      steps {
+        // get code from our Git repository
+        publishHTML([
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: false,
+            reportDir: '\\functionaltest\\target\\surefire-reports',
+            reportFiles: 'index.html',
+            reportName: 'Report'
+          ])
+        }
+      } 
 stage ('DeployProd') {
 steps {
 deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://34.68.50.56:8080')], contextPath: 'ProdWebapp', war: '**/*.war'
