@@ -77,7 +77,32 @@ stage('UI Test') { // Get code
             reportName: 'Report'
           ])
         }
+      }
+      
+stage('Performance Test') { // Get code
+      steps {
+        // get code from our Git repository
+        echo 'Running BalzeMeterTest'
+        blazeMeterTest credentialsId: 'Blazemeter', testId: '8499632.taurus', workspaceId: '650666'
+        }
+      }
+      
+stage('Sanity Test') { // Get code
+      steps {
+      pom: 'Acceptancetest/pom.xml', goals: 'test'
+        // get code from our Git repository
+        publishHTML([
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: false,
+            reportDir: '\\Acceptancetest\\target\\surefire-reports',
+            reportFiles: 'index.html',
+            reportName: 'Sanity Test Report'
+          ])
+        }
       } 
+      
+      
 stage ('DeployProd') {
 steps {
 deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://34.68.50.56:8080')], contextPath: 'ProdWebapp', war: '**/*.war'
