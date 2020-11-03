@@ -87,7 +87,7 @@ stage('Performance Test') { // Get code
       
 stage('Sanity Test') { // Get code
       steps {
-      pom: 'Acceptancetest/pom.xml', goals: 'test'
+      
         // get code from our Git repository
         publishHTML([
             allowMissing: false,
