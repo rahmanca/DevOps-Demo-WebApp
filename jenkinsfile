@@ -79,12 +79,38 @@ stages {
           ])
         }
       }
+      
+      stage('Performance Test') { // Get code
+      steps {
+        // get code from our Git repository
+        echo 'Running BalzeMeterTest'
+        blazeMeterTest credentialsId: 'Blazemeter', testId: '8499632.taurus', workspaceId: '650666'
+        }
+      }
+      
+
 
     stage ('DeployProd') {
         steps {
+            sh 'mvn clean install'
             deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://35.224.237.85:8080')], contextPath: 'ProdWebapp', war: '**/*.war'
         }
     }
+    
+    stage('Sanity Test') { // Get code
+      steps {
+      sh 'mvn clean install -f Aceptancetest/pom.xml'
+        // get code from our Git repository
+        publishHTML([
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: false,
+            reportDir: '\\Acceptancetest\\target\\surefire-reports',
+            reportFiles: 'index.html',
+            reportName: 'Sanity Test Report'
+          ])
+        }
+      } 
 
     stage ('SlackNotificationProd') {
         steps {
