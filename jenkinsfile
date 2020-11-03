@@ -35,7 +35,7 @@ stages {
     stage ('jFrogserver') {
         steps {
             rtServer (
-            id: 'artifactory', url: 'https://devopsscriptedpipeline.jfrog.io/artifactory',
+            id: 'artifactory', url: 'https://devops5391.jfrog.io/artifactory',
             // If you're using username and password:
             username: 'deploy1',
             password: '!3O18neo',
