@@ -1,5 +1,8 @@
 pipeline {
 agent any
+
+def buildinfo
+
 tools {
 maven 'maven'
 }
