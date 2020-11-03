@@ -55,7 +55,7 @@ stages {
             "files": [
                 {
                 "pattern": "**/*.war",
-                "target": "jenkins/WEBPOC/AVNCommunication/1.0/"
+                "target": "deploy1/WEBPOC/AVNCommunication/1.0/"
                 }
                 ]
             }''',
