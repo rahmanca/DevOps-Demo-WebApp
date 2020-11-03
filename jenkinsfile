@@ -63,6 +63,7 @@ buildNumber: '50'
 }
 stage('UI Test') { // Get code
       steps {
+      pom: 'functionaltest/pom.xml', goals: 'test'
         // get code from our Git repository
         publishHTML([
             allowMissing: false,
